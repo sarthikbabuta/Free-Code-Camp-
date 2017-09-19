@@ -1,0 +1,16 @@
+
+function destroyer(arr) {
+  // Remove all the values
+  var filterArr = [];
+  
+  for ( var i = 1; i < arguments.length; i++ ) {
+    filterArr.push(arguments[i]);
+  }
+  
+  return arr.filter(function(value) {
+    return filterArr.indexOf(value) === -1;
+  });
+  
+}
+
+destroyer([1, 2, 3, 1, 2, 3], 2, 3);

@@ -1,0 +1,69 @@
+function compareInventories(a, b) {
+    return (a[1] < b[1]
+        ? -1
+        : (a[1] > b[1]
+            ? 1
+            : 0));
+}
+ 
+function updateInventory(arr1, arr2) {
+    arr1.sort(compareInventories);
+    arr2.sort(compareInventories);
+ 
+    var newArr = [],
+        i1 = 0,
+        i2 = 0;
+ 
+    while (i1 < arr1.length && i2 < arr2.length) {
+ 
+        switch (compareInventories(arr1[i1], arr2[i2])) {
+            case - 1:
+                newArr.push(arr1[i1++]);
+                break;
+            case 1:
+                newArr.push(arr2[i2++]);
+                break;
+            case 0:
+                arr1[i1][0] += arr2[i2][0];
+                newArr.push(arr1[i1]);
+                i1++;
+                i2++;
+        }
+    }
+    while (i1 < arr1.length) {
+        newArr.push(arr1[i1++]);
+    }
+    while (i2 < arr2.length) {
+        newArr.push(arr2[i2++]);
+    }
+ 
+    return newArr;
+}
+// Example inventory lists
+var curInv = [
+    [
+        21, "Bowling Ball"
+    ],
+    [
+        2, "Dirty Sock"
+    ],
+    [
+        1, "Hair Pin"
+    ],
+    [5, "Microphone"]
+];
+ 
+var newInv = [
+    [
+        2, "Hair Pin"
+    ],
+    [
+        3, "Half-Eaten Apple"
+    ],
+    [
+        67, "Bowling Ball"
+    ],
+    [7, "Toothpaste"]
+];
+ 
+updateInventory(curInv, newInv);

@@ -1,0 +1,26 @@
+
+function pairElement(str) {
+  
+ 
+    str = str.split("");
+    var arr = []; // this is within pairElement() parent function.
+    for (var i = 0; i < str.length; i++) {
+        var subArray = [];
+        switch (str[i]) {
+            case "G":
+                subArray.push("G", "C");
+                break;
+            case "C":
+                subArray.push("C", "G");
+                break;
+            case "A":
+                subArray.push("A", "T");
+                break;
+            case "T":
+                subArray.push("T", "A");
+                break;
+        }
+        arr.push(subArray); // this is within for loop
+    }
+    return arr;
+}

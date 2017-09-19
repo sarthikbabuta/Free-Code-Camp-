@@ -1,0 +1,62 @@
+function convertToRoman(num) {
+    var romanNumeral = '',
+        numArr = [
+          3999,
+          2014,
+          1023,
+            1000,
+            900,
+          891,
+          798,
+            500,
+            400,
+            100,
+            90,
+          83,
+            50,
+            40,
+          29,
+            10,
+            9,
+            5,
+            4,
+          3,
+         2,
+            1
+        ],
+        romanArr = [
+          'MMMCMXCIX',
+          'MMXIV',
+          'MXXIII',
+            'M',
+            'CM',
+          'DCCCXCI',
+          'DCCXCVIII',
+            'D',
+            'CD',
+            'C',
+            'XC',
+          'LXXXIII',
+            'L',
+            'XL',
+          'XXIX',
+            'X',
+            'IX',
+            'V',
+            'IV',
+          'III',
+             'II',
+            'I'
+        ];
+    for (var i = 0; i < numArr.length; i++)
+    {
+        if (num >= numArr[i]) 
+        {
+            romanNumeral += romanArr[i];
+            num -= numArr[i];
+        }
+    }
+    return romanNumeral.toUpperCase();
+}
+ 
+convertToRoman(36);

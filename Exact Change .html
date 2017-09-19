@@ -1,0 +1,103 @@
+function checkCashRegister(price, cash, cid) {
+    var denominations = [
+        {
+            denomination: "ONE HUNDRED",
+            value: 100.00
+        }, {
+            denomination: "TWENTY",
+            value: 20.00
+        }, {
+            denomination: "TEN",
+            value: 10.00
+        }, {
+            denomination: "FIVE",
+            value: 5.00
+        }, {
+            denomination: "ONE",
+            value: 1.00
+        }, {
+            denomination: "QUARTER",
+            value: 0.25
+        }, {
+            denomination: "DIME",
+            value: 0.10
+        }, {
+            denomination: "NICKEL",
+            value: 0.05
+        }, {
+            denomination: "PENNY",
+            value: 0.01
+        }
+    ];
+    var change = cash - price;
+    var totalCid = cid.reduce(function(accumulator, next) {
+        /* accumulator starts at value 0.0 and is the accumulated value of next. next is equal to the value in each cid sub-array. */
+        return accumulator + next[1];
+    }, 0.0);
+    if (totalCid === change) {
+        return "Closed";
+    }
+    /* Reverse the cid array here because otherwise expected outcome #5 would not result in actual outcome #5. In addition, when change is returned to the customer, it is required that the denominations be returned from highest to lowest. However, the cid sub-arrays that are provided in the arguments go from lowest to highest. */
+    cid = cid.reverse();
+    /* return new 2D array which is stored in the result variable. index is equal to the index of the current array we are in */
+    var result = denominations.reduce(function(accumulator, next, index) {
+        // if change is >= to the value of the current object we are in
+        var currentValue = 0.0;
+        if (change >= next.value) {
+            while (change >= next.value && cid[index][1] >= next.value) {
+                currentValue += next.value;
+                change -= next.value;
+                // this is the formula for rounding off the change value to two decimal places.
+                change = Math.round(change * 100) / 100;
+                cid[index][1] -= next.value;
+            }
+            accumulator.push([next.denomination, currentValue]);
+            return accumulator;
+        } else {
+            return accumulator;
+        }
+        // give the accumulator value the value of an empty array for starters
+    }, []);
+    /* we have to do this because when we just return result, the second to last expected outcome does not pass. Even though we technically have enough change, it isn't the right kind of change, and we could not give back the required change to the customer. */
+    return result.length && change === 0
+        ? result
+        : "Insufficient Funds";
+}
+// Example cash-in-drawer array:
+// [["PENNY", 1.01],
+// ["NICKEL", 2.05],
+// ["DIME", 3.10],
+// ["QUARTER", 4.25],
+// ["ONE", 90.00],
+// ["FIVE", 55.00],
+// ["TEN", 20.00],
+// ["TWENTY", 60.00],
+// ["ONE HUNDRED", 100.00]]
+ 
+checkCashRegister(19.50, 20.00, [
+    [
+        "PENNY", 1.01
+    ],
+    [
+        "NICKEL", 2.05
+    ],
+    [
+        "DIME", 3.10
+    ],
+    [
+        "QUARTER", 4.25
+    ],
+    [
+        "ONE", 90.00
+    ],
+    [
+        "FIVE", 55.00
+    ],
+    [
+        "TEN", 20.00
+    ],
+    [
+        "TWENTY", 60.00
+    ],
+    ["ONE HUNDRED", 100.00]
+]);

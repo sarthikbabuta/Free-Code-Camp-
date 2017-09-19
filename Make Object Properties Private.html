@@ -1,0 +1,39 @@
+
+var Car = function() {
+  // this is a private variable
+  var speed = 10;
+
+  // these are public methods
+  this.accelerate = function(change) {
+    speed += change;
+  };
+
+  this.decelerate = function() {
+    speed -= 5;
+  };
+
+  this.getSpeed = function() {
+    return speed;
+  };
+};
+
+var Bike = function() {
+
+  var gear;
+
+this.setGear= function(val){
+this.val1=val;
+return this.val1;
+};
+
+this.getGear =function(gear){
+
+return this.val1;
+};
+};
+  // Only change code below this line.
+
+
+var myCar = new Car();
+
+var myBike = new Bike();

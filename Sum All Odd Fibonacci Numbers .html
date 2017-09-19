@@ -1,0 +1,22 @@
+
+function sumFibs(num)
+{
+  
+ 
+    var a = 0,
+        b = 1,
+        f = 1,
+        sum = 0;
+ 
+    while (f <= num)
+    {
+        if (f % 2 === 1) 
+        sum += f;
+        f = a + b;
+        a = b;
+        b = f;
+       
+    }
+    return sum;
+}
+sumFibs(4);

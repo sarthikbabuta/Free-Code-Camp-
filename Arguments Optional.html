@@ -1,0 +1,15 @@
+function addTogether(a, b) {
+   
+    if (typeof a === "number" && arguments.length === 1)
+    {
+        return function(b) 
+        {
+            return addTogether(a, b);
+        };
+    } 
+  else if (typeof b === "number") 
+    {
+        return a + b;
+    }
+}
+addTogether(2, 3);

@@ -1,0 +1,17 @@
+function rot13(str) { // LBH QVQ VG!
+  var result = "";
+  for (var i = 0; i < str.length; i++) {
+    var unicode_value = str.charCodeAt(i);
+    if (unicode_value >= 65 && unicode_value < 78) {
+      result += String.fromCharCode(unicode_value + 13);
+    } else if (unicode_value >= 78 && unicode_value <= 90) {
+      result += String.fromCharCode(unicode_value - 13);
+    } else {
+      result += str[i];
+    }
+  }
+  return result;
+}
+
+// Change the inputs below to test
+rot13("SERR PBQR PNZC");
